@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="co.kuntz.oglgamemastershelper.StatBlock">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <fragment
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:name="co.kuntz.oglgamemastershelper.SingleAttributeBlock"
+        android:id="@+id/constitution_stat"
+        android:layout_gravity="left|top"
+        tools:layout="@layout/view_single_attribute" />
+
+    <fragment
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:name="co.kuntz.oglgamemastershelper.SingleAttributeBlock"
+        android:id="@+id/dexterity_stat"
+        android:layout_gravity="center_horizontal|top"
+        tools:layout="@layout/view_single_attribute" />
+</FrameLayout>
