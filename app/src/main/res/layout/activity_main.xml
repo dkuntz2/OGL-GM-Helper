@@ -5,16 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:ignore="MergeRootFrame">
+    tools:ignore="MergeRootFrame"
+    android:padding="10dip">
 
-    <view
-        android:layout_width="wrap_content"
+    <Spinner
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
-        android:id="@+id/single_view"
+        android:id="@+id/monster_selector"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:layout_below="@+id/monster_selector"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        app:ability_name="con"
-        app:ability_value="15"/>
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/monster_name"
+        android:layout_below="@+id/monster_selector"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
 </RelativeLayout>

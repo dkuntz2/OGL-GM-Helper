@@ -51,8 +51,8 @@ public class SingleAttributeView extends RelativeLayout {
         String abilityNameStr = arr.getString(R.styleable.SingleAttributeView_ability_name);
         int abilityScoreInt = arr.getInt(R.styleable.SingleAttributeView_ability_value, 0);
 
-        Log.d(TAG, "Ability: " + abilityNameStr);
-        Log.d(TAG, "Score: " + abilityScoreInt);
+        //Log.d(TAG, "Ability: " + abilityNameStr);
+        //Log.d(TAG, "Score: " + abilityScoreInt);
 
         abilityName.setText(abilityNameStr);
         abilityScore.setText(String.valueOf(abilityScoreInt));
@@ -78,4 +78,8 @@ public class SingleAttributeView extends RelativeLayout {
         tv.setText(String.valueOf(abilityScore));
     }
 
+    public void set(String abilityName, int abilityScore) {
+        setAbilityName(abilityName);
+        setAbilityScore(abilityScore);
+    }
 }
