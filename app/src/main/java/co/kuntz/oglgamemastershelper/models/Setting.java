@@ -9,11 +9,11 @@ public class Setting extends SugarRecord<Setting> {
     public Setting() {}
 
     public static boolean getBoolean(String key) {
-        return Boolean.parseBoolean(get(key));
-    }
+        if (get(key) == null) {
+            return false;
+        }
 
-    public static int getInt(String key) {
-        return Integer.parseInt(key);
+        return Boolean.parseBoolean(get(key));
     }
 
     public static String get(String key) {

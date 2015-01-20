@@ -20,15 +20,77 @@
         android:layout_height="20dip"
         android:layout_below="@+id/monster_selector"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/space" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/monster_name"
-        android:layout_below="@+id/monster_selector"
-        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_below="@+id/space"
+        android:layout_alignLeft="@+id/space"
+        android:layout_alignStart="@+id/space" />
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:id="@+id/space2"
+        android:layout_below="@+id/monster_name"
+        android:layout_centerHorizontal="true" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_strength"
+        android:layout_below="@+id/space2"
+        android:layout_alignLeft="@+id/space2"
+        android:layout_alignStart="@+id/space2" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_dexterity"
+        android:layout_below="@+id/space2"
+        android:layout_centerHorizontal="true" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_constitution"
+        android:layout_below="@+id/space2"
+        android:layout_alignRight="@+id/space2"
+        android:layout_alignEnd="@+id/space2" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_intelligence"
+        android:layout_below="@+id/ability_strength"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_wisdom"
+        android:layout_below="@+id/ability_dexterity"
+        android:layout_centerHorizontal="true" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="co.kuntz.oglgamemastershelper.views.SingleAttributeView"
+        android:id="@+id/ability_charisma"
+        android:layout_below="@+id/ability_constitution"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

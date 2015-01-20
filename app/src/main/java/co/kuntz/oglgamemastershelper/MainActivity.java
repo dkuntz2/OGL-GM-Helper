@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -39,6 +41,19 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAG = MainActivity.class.getName();
 
     @InjectView(R.id.monster_selector) protected Spinner monsterSelector;
+    @InjectView(R.id.monster_name) protected TextView monsterName;
+
+    @InjectView(R.id.ability_strength) protected SingleAttributeView abilityStr;
+    @InjectView(R.id.ability_dexterity) protected SingleAttributeView abilityDex;
+    @InjectView(R.id.ability_constitution) protected SingleAttributeView abilityCon;
+    @InjectView(R.id.ability_intelligence) protected SingleAttributeView abilityInt;
+    @InjectView(R.id.ability_wisdom) protected SingleAttributeView abilityWis;
+    @InjectView(R.id.ability_charisma) protected SingleAttributeView abilityCha;
+
+
+    private List<String> creatureNames;
+    private int currentItemInList = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,42 +62,30 @@ public class MainActivity extends ActionBarActivity {
 
         ButterKnife.inject(this);
 
-        boolean isDBInitialized = Setting.getBoolean("initialized");
-        if (!isDBInitialized) {
-            try {
-                AssetManager assetManager = getAssets();
-                InputStream iStream = assetManager.open("ogl_monsters.xml");
-
-                List<Creature> creatures = CreatureParser.getCreaturesFromXml(IOUtils.toString(iStream));
-                for(Creature creature : creatures) {
-                    creature.save();
-                }
-
-                Setting dbInitialized = new Setting();
-                dbInitialized.key = "initialized";
-                dbInitialized.value = "true";
-                dbInitialized.save();
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage(), e);
-            }
-        }
-
-        showRandomCreature();
-
-        Collection<String> creatureNames = CollectionUtils.collect(Creature.all(), new Transformer() {
+        creatureNames = new ArrayList<String>(CollectionUtils.collect(Creature.all(), new Transformer() {
             @Override
             public Object transform(Object input) {
                 return ((Creature) input).getName();
             }
-        });
+        }));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item);
         arrayAdapter.addAll(creatureNames);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         monsterSelector.setAdapter(arrayAdapter);
-    }
 
+        monsterSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentItemInList = position;
+                setMonster();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,12 +112,19 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        showRandomCreature();
     }
 
 
-    private void showRandomCreature() {
-        //Creature dummyCreature = Creature.random();
-        //((StatBlockView)findViewById(R.id.stat_block)).fillInCreature(dummyCreature);
+    private void setMonster() {
+        Creature currentCreature = Creature.findByName(creatureNames.get(currentItemInList));
+
+        monsterName.setText(currentCreature.getName());
+
+        abilityStr.set("str", currentCreature.getStrength());
+        abilityDex.set("dex", currentCreature.getDexterity());
+        abilityCon.set("con", currentCreature.getConstitution());
+        abilityInt.set("int", currentCreature.getIntelligence());
+        abilityWis.set("wis", currentCreature.getWisdom());
+        abilityCha.set("cha", currentCreature.getCharisma());
     }
 }

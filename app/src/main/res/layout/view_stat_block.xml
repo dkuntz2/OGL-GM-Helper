@@ -9,11 +9,12 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:id="@+id/creature_name"
+        android:textSize="20dp"
         />
 
 
     <GridLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="2"
